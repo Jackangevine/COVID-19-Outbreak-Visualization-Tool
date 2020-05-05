@@ -55,8 +55,8 @@ world_data2 = newAgain[newAgain["Country/Region"] =='Italy']
 world_data3 = newAgain[newAgain["Country/Region"] =='France']
 world_data4 = newAgain[newAgain["Country/Region"] =='England']
 world_data5 = newAgain[newAgain["Country/Region"] =='US']
-#world = world_data.concat([world_data, world_data1]).drop(columns = ['Province/State','Lat', 'Long'])
-world = pd.concat([world_data, world_data1, world_data2, world_data3, world_data4, world_data5])
+#world = world_data.drop(columns = ['Province/State','Lat', 'Long'])
+#world = pd.concat([world_data, world_data1, world_data2, world_data3, world_data4, world_data5])
 world = world.drop(columns = ['Province/State','Lat', 'Long'])
 world= world.fillna(0)
 
@@ -98,3 +98,83 @@ plt.show()
 # fdf['Predicted'] = np.round(test_prediction, 1)
 # fdf['Prediction_Error_Confirmed'] = fdf['Deaths'] - fdf['Predicted'] 
 # fdf
+
+
+world_data2 = newAgain[newAgain["Country/Region"] =='Italy']
+world2 = world_data2.drop(columns = ['Province/State','Lat', 'Long'])
+world2= world2.fillna(0)
+xW2 = world2.Confirmed.values.reshape(-1,1)
+yW2 = world2.Deaths.values.reshape(-1,1)
+print(world2)
+
+train_xW2, test_xW2, train_yW2, test_yW2 = train_test_split (xW2, yW2, test_size = 0.25, random_state = 1)
+linear_model = LinearRegression()
+linear_model.fit(train_xW2, train_yW2)
+
+intercept = linear_model.intercept_
+coeff = linear_model.coef_
+test_prediction = linear_model.predict(test_xW2)
+
+plt.title("Prediction Model") 
+plt.xlabel("Confirmed Cases") 
+plt.ylabel("Deaths") 
+plt.plot(xW2, yW2, label = 'Italy Actual')
+#plt.plot(xW, yW, label = 'Other country Actual')
+plt.plot(test_xW2, test_prediction, label = 'Predicted') 
+plt.legend(loc = 'upper left')
+plt.show()
+
+
+world_data3 = newAgain[newAgain["Country/Region"] =='Spain']
+world3 = world_data3.drop(columns = ['Province/State','Lat', 'Long'])
+world3= world3.fillna(0)
+xW3 = world3.Confirmed.values.reshape(-1,1)
+yW3 = world3.Deaths.values.reshape(-1,1)
+print(world3)
+
+train_xW3, test_xW3, train_yW3, test_yW3 = train_test_split (xW3, yW3, test_size = 0.25, random_state = 1)
+linear_model = LinearRegression()
+linear_model.fit(train_xW3, train_yW3)
+
+intercept = linear_model.intercept_
+coeff = linear_model.coef_
+test_prediction = linear_model.predict(test_xW3)
+
+plt.title("Prediction Model") 
+plt.xlabel("Confirmed Cases") 
+plt.ylabel("Deaths") 
+plt.plot(xW3, yW3, label = 'Spain Actual')
+#plt.plot(xW, yW, label = 'Other country Actual')
+plt.plot(test_xW3, test_prediction, label = 'Predicted') 
+plt.legend(loc = 'upper left')
+plt.show()
+
+
+
+world_data4 = newAgain[newAgain["Country/Region"] =='Japan']
+world4 = world_data4.drop(columns = ['Province/State','Lat', 'Long'])
+world4= world4.fillna(0)
+xW4 = world4.Confirmed.values.reshape(-1,1)
+yW4 = world4.Deaths.values.reshape(-1,1)
+print(world4)
+
+train_xW4, test_xW4, train_yW4, test_yW4 = train_test_split (xW4, yW4, test_size = 0.25, random_state = 1)
+linear_model = LinearRegression()
+linear_model.fit(train_xW4, train_yW4)
+
+intercept = linear_model.intercept_
+coeff = linear_model.coef_
+test_prediction = linear_model.predict(test_xW4)
+
+plt.title("Prediction Model") 
+plt.xlabel("Confirmed Cases") 
+plt.ylabel("Deaths") 
+plt.plot(xW4, yW4, label = 'Japan Actual')
+#plt.plot(xW, yW, label = 'Other country Actual')
+plt.plot(test_xW4, test_prediction, label = 'Predicted') 
+plt.legend(loc = 'upper left')
+plt.show()
+
+
+
+
